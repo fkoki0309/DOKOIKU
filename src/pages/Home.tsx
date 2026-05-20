@@ -1,5 +1,4 @@
 import React from 'react';
-// ① assetsフォルダから画像をインポート
 import AppIcon from '../assets/icon.png';
 
 const DokoikuHomeScreen = () => {
@@ -9,14 +8,12 @@ const DokoikuHomeScreen = () => {
         
         <div className="bg-white rounded-[2rem] p-5 shadow-sm w-full mt-4 mb-4">
           
-          {/* インジケーター（ドット） */}
           <div className="flex gap-2 mb-5">
             <div className="w-2.5 h-2.5 rounded-full bg-[#A5D2C5]"></div>
             <div className="w-2.5 h-2.5 rounded-full bg-[#E1E8EE]"></div>
             <div className="w-2.5 h-2.5 rounded-full bg-[#E1E8EE]"></div>
           </div>
 
-          {/* ヘッダー（ロゴとタイトル） */}
           <div className="flex items-center gap-3 mb-5">
             <div className="w-14 h-14 flex items-center justify-center overflow-hidden shrink-0">
               <img 
@@ -30,7 +27,6 @@ const DokoikuHomeScreen = () => {
             </h1>
           </div>
 
-          {/* メイン画像（情報が増えたので少し縦幅をスリムに 16:9 に変更） */}
           <div className="mb-6">
             <img 
               src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80&w=400&h=225" 
@@ -39,7 +35,6 @@ const DokoikuHomeScreen = () => {
             />
           </div>
 
-          {/* ボタンエリア */}
           <div className="flex flex-col gap-3.5 mb-6">
             <button className="w-full py-3.5 bg-[#FF7162] hover:bg-[#FF5D4C] text-white text-[15px] font-bold rounded-full shadow-[0_4px_12px_rgba(255,113,98,0.3)] transition-all active:scale-95">
               お店を決める（幹事）
@@ -50,7 +45,6 @@ const DokoikuHomeScreen = () => {
             </button>
           </div>
 
-          {/* ▼ 追加：使い方セクション ▼ */}
           <div className="pt-5 border-t border-gray-100">
             <h2 className="text-[15px] font-bold text-gray-800 mb-4 flex items-center gap-2">
               <span className="w-1.5 h-4 bg-[#A5D2C5] rounded-full"></span>
@@ -77,7 +71,6 @@ const DokoikuHomeScreen = () => {
               </div>
             </div>
           </div>
-          {/* ▲ 使い方セクション ここまで ▲ */}
 
         </div>
       </div>
