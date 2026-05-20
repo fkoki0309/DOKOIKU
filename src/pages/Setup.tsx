@@ -47,7 +47,6 @@ const Setup = () => {
 
   const getTotalSelectedCount = () => selectedGenreCodes.length + customKeywords.length;
 
-  // ★変更：引数でメッセージを受け取れるように修正
   const showGenreError = (msg: string) => {
     setGenreError(msg);
     setTimeout(() => {
@@ -58,7 +57,6 @@ const Setup = () => {
   const addMasterGenre = (code: string) => {
     setGenreError('');
     if (!selectedGenreCodes.includes(code)) {
-      // ★追加：12個以上の場合はエラーを出して追加させない
       if (getTotalSelectedCount() >= 12) {
         showGenreError('選択できるジャンルは最大12個までです！');
         return;
@@ -79,7 +77,6 @@ const Setup = () => {
     e.preventDefault();
     const trimmed = inputText.trim();
     if (trimmed && !customKeywords.includes(trimmed)) {
-      // ★追加：12個以上の場合はエラーを出して追加させない
       if (getTotalSelectedCount() >= 12) {
         showGenreError('選択できるジャンルは最大12個までです！');
         return;
@@ -108,34 +105,52 @@ const Setup = () => {
 
   return (
     <div className="flex-1 bg-[#F8F6F3] flex flex-col p-4 pt-6 overflow-y-auto">
-      <div className="flex items-center gap-4 mb-6 px-1">
-        <button onClick={() => navigate(-1)} className="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm text-gray-400 active:scale-95 transition-all shrink-0">
+      
+      {/* ▼ グローバルヘッダー（カードの外側） ▼ */}
+      <div className="relative flex justify-center items-center mb-6 min-h-[44px]">
+        {/* 戻るボタン（左端に絶対配置） */}
+        <button 
+          onClick={() => navigate(-1)} 
+          className="absolute left-0 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm text-gray-400 active:scale-95 transition-all"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 flex items-center justify-center overflow-hidden shrink-0">
-            <img src={AppIcon} alt="DOKOIKU ロゴ" className="w-full h-full object-contain object-bottom scale-110 mix-blend-multiply" />
+
+        {/* アイコンとプロダクト名（中央配置） */}
+        <div className="flex items-center gap-2.5">
+          <div className="w-10 h-10 flex items-center justify-center overflow-hidden shrink-0">
+            <img 
+              src={AppIcon} 
+              alt="DOKOIKU ロゴ" 
+              className="w-full h-full object-contain object-bottom scale-110 mix-blend-multiply" 
+            />
           </div>
-          <h1 className="text-xl font-black text-gray-900 tracking-wider">DOKOIKU</h1>
+          <h1 className="text-xl font-black text-gray-900 tracking-wider">
+            DOKOIKU
+          </h1>
         </div>
       </div>
 
-<div className="bg-white rounded-[2rem] p-6 shadow-sm w-full">
+      {/* メインの設定カード */}
+      <div className="bg-white rounded-[2rem] p-5 shadow-sm w-full mb-4">
         
-        {/* ★追加：インジケーター（ドット）: セットアップはステップ1 */}
-        <div className="flex gap-2 mb-5">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#A5D2C5]"></div> {/* 0: アクティブ */}
-          <div className="w-2.5 h-2.5 rounded-full bg-[#A5D2C5]"></div> {/* 1: アクティブ */}
-          <div className="w-2.5 h-2.5 rounded-full bg-[#E1E8EE]"></div> {/* 2: 非アクティブ */}
+        {/* プログレスバー（カード内の最上部に配置） */}
+        <div className="flex justify-center mb-6">
+          <div className="flex gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#A5D2C5]"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-[#A5D2C5]"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-[#E1E8EE]"></div>
+          </div>
         </div>
 
-        <div className="mb-8">
-          <h2 className="text-xl font-black text-gray-900 tracking-wider mb-2">条件をセット</h2>
-          <p className="text-xs text-gray-400 font-bold">みんなでお店を絞り込みましょう！</p>
+        <div className="mb-8 text-center">
+          <h2 className="text-[18px] font-black text-gray-900 tracking-wider mb-2">条件をセット</h2>
+          <p className="text-[12px] text-gray-400 font-bold">みんなでお店を絞り込みましょう！</p>
         </div>
 
+        {/* 参加人数 */}
         <div className="mb-8">
           <label className="text-[14px] font-black text-gray-800 mb-4 flex items-center gap-2">
             <span className="w-1.5 h-4 bg-[#A5D2C5] rounded-full"></span>参加人数
@@ -154,6 +169,7 @@ const Setup = () => {
           </div>
         </div>
 
+        {/* 予算感 */}
         <div className="mb-8">
           <label className="text-[14px] font-black text-gray-800 mb-4 flex items-center gap-2">
             <span className="w-1.5 h-4 bg-[#A5D2C5] rounded-full"></span>予算感
@@ -167,9 +183,9 @@ const Setup = () => {
           </div>
         </div>
 
+        {/* ジャンル選択 */}
         <div className="mb-10">
           <div className="flex items-center justify-between mb-4">
-            {/* ★変更：ラベルの横に「(現在 〇/12)」のカウンターを追加 */}
             <label className="text-[14px] font-black text-gray-800 flex items-center gap-2">
               <span className="w-1.5 h-4 bg-[#A5D2C5] rounded-full"></span>食べたいジャンル
               <span className="text-[11px] text-gray-400 font-bold bg-gray-100 px-2 py-0.5 rounded-md ml-1">
@@ -191,7 +207,7 @@ const Setup = () => {
             />
             <button
               type="submit"
-              disabled={!inputText.trim() || getTotalSelectedCount() >= 12} // ★変更：上限時は追加ボタンも無効化
+              disabled={!inputText.trim() || getTotalSelectedCount() >= 12}
               className="bg-[#5C6B7A] disabled:bg-gray-200 text-white px-5 rounded-xl text-[13px] font-bold transition-all"
             >
               追加
@@ -244,6 +260,7 @@ const Setup = () => {
           )}
         </div>
 
+        {/* アクションボタン */}
         <div className="flex flex-col gap-3">
           <button 
             onClick={handleSubmit}
