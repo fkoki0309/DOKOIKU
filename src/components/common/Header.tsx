@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import AppIcon from '../../assets/icon.png';
+import AppIcon from '../../assets/icon_v2.png';
 
 interface HeaderProps {
   showBackButton?: boolean;
@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ showBackButton = false }) => {
         <div className="w-10 h-10 flex items-center justify-center overflow-hidden shrink-0">
           <img src={AppIcon} alt="DOKOIKU ロゴ" className="w-full h-full object-contain object-bottom scale-110 mix-blend-multiply" />
         </div>
-        <h1 className="text-xl font-black text-gray-900 tracking-wider">DOKOIKU</h1>
+        <h1 className="text-xl font-black text-gray-900 tracking-wider">PITAMESHI</h1>
       </div>
     </div>
   );

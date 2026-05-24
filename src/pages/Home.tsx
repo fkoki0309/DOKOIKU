@@ -1,55 +1,85 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import KanpaiImage from '../assets/home.png';
-// 作成した共通レイアウトをインポート
 import { PageLayout } from '../components/common/PageLayout';
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
-    // step={0} で最初のドットを光らせる。戻るボタンは不要なので showBackButton は渡さない
     <PageLayout step={0}>
       
-      <div className="mb-6">
-        <img 
-          src={KanpaiImage} 
-          alt="居酒屋での飲み会で楽しそうに乾杯する人々" 
-          className="w-full aspect-video object-cover rounded-[1.5rem]"
-        />
+      <div className="mb-5">
+        <img src={KanpaiImage} alt="みんなで楽しく飲み会" className="w-full aspect-video object-cover rounded-[1.5rem] shadow-sm" />
       </div>
 
-      {/* アクションボタン */}
-      <div className="flex flex-col gap-3.5 mb-6">
-        <button
-          onClick={() => navigate('/setup')}
-          className="w-full py-3.5 bg-[#FF7162] hover:bg-[#FF5D4C] text-white text-[15px] font-bold rounded-full shadow-[0_4px_12px_rgba(255,113,98,0.3)] transition-all active:scale-95">
-          お店を決める（幹事）
-        </button>
-        <button className="w-full py-3.5 bg-white border-[1.5px] border-[#E1E8EE] hover:bg-gray-50 text-[#5C6B7A] text-[15px] font-bold rounded-full transition-all active:scale-95">
-          招待URLから参加
-        </button>
-      </div>
-
-      {/* 使い方ステップ */}
-      <div className="pt-5 border-t border-gray-100 mt-auto">
-        <h2 className="text-[15px] font-bold text-gray-800 mb-4 flex items-center gap-2">
-          <span className="w-1.5 h-4 bg-[#A5D2C5] rounded-full"></span>使い方
+      <div className="text-center mb-8 px-2">
+        <h2 className="text-[22px] font-black text-gray-800 mb-3 leading-tight tracking-tight">
+          「今日どこ行く？」を<br />
+          <span className="text-[#FF7162] relative inline-block mt-1">
+            スワイプで楽しく決める！
+            <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#A5D2C5]/60" viewBox="0 0 100 10" preserveAspectRatio="none">
+              <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="transparent" strokeLinecap="round" />
+            </svg>
+          </span>
         </h2>
-        <div className="flex flex-col gap-2.5">
-          {[
-            { num: 1, text: '幹事がお店の条件を設定' },
-            { num: 2, text: '参加者にURLをシェア' },
-            { num: 3, text: 'みんなで直感スワイプ！' },
-          ].map((s) => (
-            <div key={s.num} className="flex items-center gap-3 bg-gray-50 p-3 rounded-2xl">
-              <div className="w-7 h-7 rounded-full bg-[#FF7162] text-white flex items-center justify-center text-[13px] font-black shrink-0">{s.num}</div>
-              <p className="text-[13px] text-gray-600 font-bold">{s.text}</p>
+        <p className="text-[13px] text-gray-500 font-bold leading-relaxed mt-4">
+          幹事の「お店探し」の負担をゼロに。<br />
+          みんなの好みが<strong className="text-[#FF7162]">ピタッ</strong>と合うお店が、<br />
+          ゲーム感覚で簡単に見つかります🍻
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-3.5 mb-10">
+        <button onClick={() => navigate('/setup')} className="w-full py-4 bg-[#FF7162] text-white text-[16px] font-bold rounded-full shadow-[0_4px_12px_rgba(255,113,98,0.3)] transition-all active:scale-95">
+          部屋を作ってお誘い（幹事）
+        </button>
+        <button className="w-full py-4 bg-white border-2 border-gray-100 text-gray-500 text-[15px] font-bold rounded-full transition-all active:scale-95">
+          招待URLから参加する
+        </button>
+      </div>
+
+      {/* お店決定までの流れ */}
+      <div className="pt-6 border-t-2 border-dashed border-gray-100 mt-auto mb-2">
+        <h2 className="text-[17px] font-black text-gray-800 mb-5 flex items-center gap-2">
+          <span className="w-1.5 h-4 bg-[#FF7162] rounded-full"></span>
+          お店決定までの流れ
+        </h2>
+
+        <div className="flex flex-col gap-3">
+          <div className="bg-gray-50 p-4 rounded-2xl flex gap-3">
+            <div className="w-6 h-6 rounded-full bg-[#A5D2C5] text-white flex items-center justify-center text-[11px] font-black shrink-0 mt-0.5">1</div>
+            <div>
+              <h3 className="text-[14px] font-black text-gray-800">条件をセット</h3>
+              <p className="text-[11px] text-gray-500 font-bold mt-0.5">幹事が予算や人数を設定します。</p>
             </div>
-          ))}
+          </div>
+          
+          <div className="bg-gray-50 p-4 rounded-2xl flex gap-3">
+            <div className="w-6 h-6 rounded-full bg-[#A5D2C5] text-white flex items-center justify-center text-[11px] font-black shrink-0 mt-0.5">2</div>
+            <div>
+              <h3 className="text-[14px] font-black text-gray-800">ジャンルをスワイプ！</h3>
+              <p className="text-[11px] text-gray-500 font-bold mt-0.5">和食？中華？まずは食べたい気分を一致！</p>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 p-4 rounded-2xl flex gap-3">
+            <div className="w-6 h-6 rounded-full bg-[#A5D2C5] text-white flex items-center justify-center text-[11px] font-black shrink-0 mt-0.5">3</div>
+            <div>
+              <h3 className="text-[14px] font-black text-gray-800">お店をスワイプ！</h3>
+              <p className="text-[11px] text-gray-500 font-bold mt-0.5">絞り込まれたお店から行きたい場所を投票。</p>
+            </div>
+          </div>
+
+          <div className="bg-[#FFF5F4] p-4 rounded-2xl flex gap-3 border border-[#FFE8E6]">
+            <div className="w-6 h-6 rounded-full bg-[#FF7162] text-white flex items-center justify-center text-[11px] font-black shrink-0 mt-0.5 shadow-sm">4</div>
+            <div>
+              <h3 className="text-[14px] font-black text-[#FF7162]">マッチしてお店決定🎉</h3>
+              <p className="text-[11px] text-[#FF7162]/80 font-bold mt-0.5">全員一致したお店で乾杯！</p>
+            </div>
+          </div>
         </div>
       </div>
-
     </PageLayout>
   );
 };
